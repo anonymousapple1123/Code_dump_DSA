@@ -1,0 +1,165 @@
+#include <iostream>
+#include "doubly_node.h"
+
+class CircularDoublyLinkedList {
+private:
+    Node* head;
+
+public:
+    CircularDoublyLinkedList() : head(nullptr) {}
+
+    void add(int value) {
+        Node* newNode = new Node(value);
+        if (!head) {
+            head = newNode;
+            head->next = head;
+            head->prev = head;
+        } else {
+            Node* tail = head->prev;
+            tail->next = newNode;
+            newNode->prev = tail;
+            newNode->next = head;
+            head->prev = newNode;
+        }
+    }
+
+    void removeFirst() {
+        if (!head) return;
+        if (head->next == head) {
+            delete head;
+            head = nullptr;
+        } else {
+            Node* tail = head->prev;
+            Node* toDelete = head;
+            head = head->next;
+            tail->next = head;
+            head->prev = tail;
+            delete toDelete;
+        }
+    }
+
+    void display() {
+        if (!head) return;
+        Node* current = head;
+        do {
+            std::cout << current->data << " ";
+            current = current->next;
+        } while (current != head);
+        std::cout << std::endl;
+    }
+
+    ~CircularDoublyLinkedList() {
+        while (head) {
+            removeFirst();
+        }
+    }
+};
+
+//***************************************************************************************************************************************************** */
+
+
+
+
+
+class CircularSinglyLinkedList {
+private:
+    Node* head;
+
+public:
+    CircularSinglyLinkedList() : head(nullptr) {}
+
+    // void add_at_end(int value){
+    //     Node* newNode= new Node(value);
+    //     Node *temp=head;
+    //     while(temp->next!=head){
+    //         if(temp->next==head){
+    //             temp->next=newNode;
+    //             newNode->next=head;
+    //         }
+    //     }
+    // }
+
+    void add_at_end(int value) {
+    Node* newNode = new Node(value);
+    if (!head) {
+        head = newNode;
+        head->next = head; 
+    } else {
+        Node* temp = head;
+        while (temp->next != head) {
+            temp = temp->next;
+        } 
+        temp->next = newNode; 
+        newNode->next = head; 
+    }
+}
+
+    void add(int value) {
+    Node* newNode = new Node(value);
+    if (!head) {
+        head = newNode;
+        head->next = head; 
+    } else {
+        Node* temp = head;
+        while (temp->next != head) {
+            temp = temp->next; 
+        }
+        temp->next = newNode; 
+        newNode->next = head; 
+    }
+
+    }
+    void removeFirst() {
+        if (!head) return;
+        if (head->next == head) {
+            delete head;
+            head = nullptr;
+        } else {
+            Node* tail = head->prev;
+            Node* toDelete = head;
+            head = head->next;
+            tail->next = head;
+            head->prev = tail;
+            delete toDelete;
+        }
+    }
+    void display() {
+        if (!head) return;
+        Node* current = head;
+        do {
+            std::cout << current->data << " ";
+            current = current->next;
+        } while (current != head);
+        std::cout << std::endl;
+    }
+
+    ~CircularSinglyLinkedList() {
+        while (head) {
+            removeFirst();
+        }
+    }
+};
+
+int main() {
+    // CircularDoublyLinkedList list;
+    // list.add(1);
+    // list.add(2);
+    // list.add(3);
+    // list.display();
+    // list.removeFirst();
+    // list.display();
+    CircularSinglyLinkedList cll;
+    cll.add(2);
+    cll.add(4);
+    cll.add(6);
+    cll.add(8);
+    cll.add(10);
+    cll.add_at_end(690);
+    cll.add_at_end(60);
+    cll.add_at_end(69);
+
+
+    cll.display();
+    return 0;
+}
+
