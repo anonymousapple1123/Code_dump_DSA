@@ -1,0 +1,78 @@
+#include<iostream>
+#include "stack.h"
+int main(){
+    stack<int> st1;
+    int choice{0};
+    bool flag{true};
+    std::cout<<"Stack is created, Choose the operation : "<<std::endl;
+    while (flag==true){
+        std::cout<<"__________________________________________"<<std::endl;
+
+        std::cout<<"1. Push an element."<<std::endl;
+        std::cout<<"2. Pop an element. "<<std::endl;
+        std::cout<<"3. Peek in stack. "<<std::endl;
+        std::cout<<"4. Check if empty. "<<std::endl;
+        std::cout<<"5. Check if full. "<<std::endl;
+        std::cout<<"6. Display all elements. "<<std::endl;
+        std::cout<<"7. Check reserved space. "<<std::endl;
+        std::cout<<"8. Help."<<std::endl;
+        std::cout<<"0. Exit."<<std::endl;
+        std::cout<<"__________________________________________"<<std::endl;
+
+        std::cout<<"\nChoice : ";
+        std::cin>>choice;
+        switch (choice) {
+            case 1: {
+                int value{-1};
+                std::cout << "Enter value to push: ";
+                std::cin >> value;
+                st1.push(value);
+                break;
+            }
+            case 2:
+                st1.pop();
+                break;
+
+            case 3: 
+                std::cout << "Top element: " << st1.peek() << std::endl;
+                break;
+
+            case 4: 
+                if (st1.is_empty()) {
+                    std::cout << "Stack is empty." << std::endl;
+                } else {
+                    std::cout << "Stack is not empty." << std::endl;
+                }
+                break;
+
+            case 5: 
+                if (st1.is_full()) {
+                    std::cout << "Stack is full." << std::endl;
+                } else {
+                    std::cout << "Stack is not full." << std::endl;
+                }
+                break;
+
+            case 7: 
+                st1.reserved_space();
+                break;
+            case 6:
+                st1.display();
+                break;
+            case 8:
+                st1.help();
+                break;
+            case 0:
+                std::cout << "Exiting..." << std::endl;
+                flag=false;
+                break;
+
+            default:
+                std::cout << "Invalid choice. Please try again." << std::endl;
+                break;
+
+        }
+
+    }
+    return 0;
+}
